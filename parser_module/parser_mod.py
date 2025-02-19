@@ -288,16 +288,3 @@ def parse(token_list):
     except Exception as e:
         print(f"Parsing error: {str(e)}")
         return None
-
-# -----------------------------------------------------------------------------
-# For testing purposes (optional)
-# -----------------------------------------------------------------------------
-if __name__ == '__main__':
-    # For testing, you can simulate obtaining tokens from the lexer.
-    # For example:
-    from lexer_module.lexer import tokenize
-    with open('sample_code.apbl', 'r') as f:
-        source = f.read()
-    tokens_list = tokenize(source)
-    ast = parse(tokens_list)
-    print(ast)
