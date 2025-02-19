@@ -1,0 +1,76 @@
+$$ APBL Sample Code - Flight Booking System
+$$ This demonstrates core language features with a practical example
+
+$$ Basic variable declarations
+int maxSeats = 100.
+float ticketPrice = 299.99.
+string flightNumber = "FL123".
+bool isInternational = True.
+date departureDate = "2024-05-15".
+time departureTime = "10:30:00".
+
+$$ Function to calculate total price with tax
+function float calculateTotalPrice(float basePrice, float taxRate) [
+    float taxAmount = basePrice * taxRate.
+    return basePrice + taxAmount.
+]
+
+$$ Function to check seat availability
+function bool checkAvailability(int requestedSeats) [
+    if (requestedSeats <= maxSeats) [
+        return True.
+    ] else [
+        return False.
+    ]
+]
+
+$$ Function to display booking confirmation
+function void displayConfirmation(string passengerName, string flightNum) [
+    string message = "Booking confirmed for " + passengerName.
+    display(message).
+    display("Flight number: " + flightNum).
+    display("Departure: ").
+    display(departureDate).
+    display(departureTime).
+]
+
+$$ Function to process a booking
+function bool processBooking(string passengerName, int seatCount) [
+    if (checkAvailability(seatCount)) [
+        float totalCost = calculateTotalPrice(ticketPrice * seatCount, 0.1).
+        book(flightNumber, passengerName).
+        string userId = gen("USER").
+        reg(userId, "defaultPass").
+        maxSeats = maxSeats - seatCount.
+        displayConfirmation(passengerName, flightNumber).
+        return True.
+    ] else [
+        display("Booking failed - not enough seats").
+        return False.
+    ]
+]
+
+$$ Main booking flow
+string customerName = "John Smith".
+int seatsNeeded = 2.
+
+$$ Process the booking
+if (isInternational) [
+    ticketPrice = ticketPrice * 1.5.
+]
+
+$$ Counter for booking attempts
+int attempts = 3.
+while (attempts > 0) [
+    if (processBooking(customerName, seatsNeeded)) [
+        display("Booking successful").
+        attempts = 0.
+    ] else [
+        attempts = attempts - 1.
+        if (attempts > 0) [
+            display("Retrying booking...").
+        ] else [
+            display("Maximum booking attempts reached").
+        ]
+    ]
+]

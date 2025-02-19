@@ -1,0 +1,90 @@
+SYNTAX ANALYSIS
+===============
+
+program
+  declaration 'maxSeats'
+  declaration 'ticketPrice'
+  declaration 'flightNumber'
+  declaration 'isInternational'
+  declaration 'departureDate'
+  declaration 'departureTime'
+  function_def 'calculateTotalPrice'
+    block
+      declaration 'taxAmount'
+      return
+    parameter 'basePrice'
+    parameter 'taxRate'
+  function_def 'checkAvailability'
+    block
+      if
+        binary_op [<=]
+          identifier 'requestedSeats'
+          identifier 'maxSeats'
+        then:
+          block
+            return
+        else:
+          block
+            return
+    parameter 'requestedSeats'
+  function_def 'displayConfirmation'
+    block
+      declaration 'message'
+      function_call 'display'
+      function_call 'display'
+      function_call 'display'
+      function_call 'display'
+      function_call 'display'
+    parameter 'passengerName'
+    parameter 'flightNum'
+  function_def 'processBooking'
+    block
+      if
+        function_call 'checkAvailability'
+        then:
+          block
+            declaration 'totalCost'
+            function_call 'book'
+            declaration 'userId'
+            function_call 'reg'
+            assignment
+            function_call 'displayConfirmation'
+            return
+        else:
+          block
+            function_call 'display'
+            return
+    parameter 'passengerName'
+    parameter 'seatCount'
+  declaration 'customerName'
+  declaration 'seatsNeeded'
+  if
+    identifier 'isInternational'
+    then:
+      block
+        assignment
+  declaration 'attempts'
+  while
+    binary_op [>]
+      identifier 'attempts'
+      literal = 0
+    block
+      if
+        function_call 'processBooking'
+        then:
+          block
+            function_call 'display'
+            assignment
+        else:
+          block
+            assignment
+            if
+              binary_op [>]
+                identifier 'attempts'
+                literal = 0
+              then:
+                block
+                  function_call 'display'
+              else:
+                block
+                  function_call 'display'
